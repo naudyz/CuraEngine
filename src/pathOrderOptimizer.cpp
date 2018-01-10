@@ -15,7 +15,8 @@ namespace cura {
 */
 void PathOrderOptimizer::optimize()
 {
-    bool picked[polygons.size()];
+//    bool picked[polygons.size()];
+    bool *picked = new bool[polygons.size()];
     memset(picked, false, sizeof(bool) * polygons.size());/// initialized as falses
     
     for (unsigned poly_idx = 0; poly_idx < polygons.size(); ++poly_idx) /// find closest point to initial starting point within each polygon +initialize picked
@@ -90,6 +91,7 @@ void PathOrderOptimizer::optimize()
             logError("Failed to find next closest polygon.\n");
         }
     }
+    delete[] picked;
 }
 
 int PathOrderOptimizer::getClosestPointInPolygon(Point prev_point, int poly_idx)
@@ -175,7 +177,8 @@ void LineOrderOptimizer::optimize()
 {
     int gridSize = 5000; // the size of the cells in the hash grid. TODO
     SparsePointGridInclusive<unsigned int> line_bucket_grid(gridSize);
-    bool picked[polygons.size()];
+//    bool picked[polygons.size()];
+    bool *picked = new bool[polygons.size()];
     memset(picked, false, sizeof(bool) * polygons.size());/// initialized as falses
 
     loc_to_line = nullptr;
@@ -325,6 +328,7 @@ void LineOrderOptimizer::optimize()
     {
         delete loc_to_line;
     }
+    delete[] picked;
 }
 
 float LineOrderOptimizer::combingDistance2(const Point &p0, const Point &p1)

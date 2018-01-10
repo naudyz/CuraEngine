@@ -8,7 +8,7 @@
 #include "SettingContainer.h"
 
 #include "../utils/NoCopy.h"
-#include "rapidjson/document.h"
+#include "../libs/rapidjson/document.h"
 
 namespace cura
 {

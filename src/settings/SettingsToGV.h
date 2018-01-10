@@ -6,7 +6,9 @@
 #include <stdio.h> // for file output
 #include <sstream>
 #include <iostream> // debug IO
+#ifndef WIN32
 #include <libgen.h> // dirname
+#endif
 #include <string>
 #include <algorithm> // find_if
 #include <regex> // regex_search
@@ -15,10 +17,10 @@
 #include <set>
 #include <unordered_map>
 
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/error/en.h"
-#include "rapidjson/filereadstream.h"
+#include "../libs/rapidjson/rapidjson.h"
+#include "../libs/rapidjson/document.h"
+#include "../libs/rapidjson/error/en.h"
+#include "../libs/rapidjson/filereadstream.h"
 #include "../utils/logoutput.h"
 #include "SettingRegistry.h"
 
@@ -262,9 +264,13 @@ private:
         
         if (json_document.HasMember("inherits"))
         {
+#ifndef WIN32
             std::string filename_copy = std::string(filename.c_str()); // copy the string because dirname(.) changes the input string!!!
             char* filename_cstr = (char*)filename_copy.c_str();
             int err = generate(std::string(dirname(filename_cstr)) + std::string("/") + json_document["inherits"].GetString());
+#else
+            int err = generate(filename.substr(0, filename.find_last_of('\\')) + std::string("\\") + json_document["inherits"].GetString());
+#endif
             if (err)
             {
                 return err;

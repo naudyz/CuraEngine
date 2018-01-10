@@ -7,7 +7,7 @@
 #include <vector>
 #include <assert.h>
 #include <float.h>
-#include <clipper/clipper.hpp>
+#include "../libs/clipper/clipper.hpp"
 
 #include <algorithm>    // std::reverse, fill_n array
 #include <cmath> // fabs
@@ -398,7 +398,7 @@ public:
 
     void remove(unsigned int index)
     {
-        POLY_ASSERT(index < size() && index <= std::numeric_limits<int>::max());
+        POLY_ASSERT(index < size() && index <= std::numeric_limits<unsigned int>::max());
         path->erase(path->begin() + index);
     }
 
@@ -476,7 +476,8 @@ public:
 
     operator bool() const
     {
-        return path;
+        return path ? true : false;
+//        return path;
     }
 };
 
@@ -509,7 +510,8 @@ public:
 
     operator bool() const
     {
-        return path;
+        return path ? true : false;
+//        return path;
     }
 };
 
@@ -571,12 +573,12 @@ public:
 
     PolygonRef operator[] (unsigned int index)
     {
-        POLY_ASSERT(index < size() && index <= std::numeric_limits<int>::max());
+        POLY_ASSERT(index < size() && index <= std::numeric_limits<unsigned int>::max());
         return paths[index];
     }
     ConstPolygonRef operator[] (unsigned int index) const
     {
-        POLY_ASSERT(index < size() && index <= std::numeric_limits<int>::max());
+        POLY_ASSERT(index < size() && index <= std::numeric_limits<unsigned int>::max());
         return paths[index];
     }
     ClipperLib::Paths::iterator begin()
@@ -602,7 +604,7 @@ public:
      */
     void remove(unsigned int index)
     {
-        POLY_ASSERT(index < size() && index <= std::numeric_limits<int>::max());
+        POLY_ASSERT(index < size() && index <= std::numeric_limits<unsigned int>::max());
         if (index < paths.size() - 1)
         {
             paths[index] = std::move(paths.back());
@@ -642,7 +644,7 @@ public:
      */
     void addLine(const Point from, const Point to)
     {
-        paths.emplace_back((std::initializer_list<Point>){from, to});
+        paths.emplace_back(std::initializer_list<Point>{from, to});
     }
 
     template<typename... Args>

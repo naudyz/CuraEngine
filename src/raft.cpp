@@ -1,5 +1,6 @@
 /** Copyright (C) 2013 Ultimaker - Released under terms of the AGPLv3 License */
-#include <clipper/clipper.hpp>
+//#include <clipper/clipper.hpp>
+#include "../libs/clipper/clipper.hpp"
 
 #include "utils/math.h"
 #include "raft.h"

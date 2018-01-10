@@ -279,6 +279,8 @@ bool CommandSocket::isInstantiated()
 
 void CommandSocket::connect(const std::string& ip, int port)
 {
+    UNUSED_PARAM(ip);
+    UNUSED_PARAM(port);
 #ifdef ARCUS
     private_data->socket = new Arcus::Socket();
     private_data->socket->addListener(new Listener());
@@ -519,6 +521,9 @@ void CommandSocket::handleObjectList(cura::proto::ObjectList* list, const google
 
 void CommandSocket::sendOptimizedLayerInfo(int layer_nr, int32_t z, int32_t height)
 {
+    UNUSED_PARAM(layer_nr);
+    UNUSED_PARAM(z);
+    UNUSED_PARAM(height);
 #ifdef ARCUS
     std::shared_ptr<cura::proto::LayerOptimized> layer = private_data->getOptimizedLayerById(layer_nr);
     layer->set_height(z);
@@ -528,6 +533,11 @@ void CommandSocket::sendOptimizedLayerInfo(int layer_nr, int32_t z, int32_t heig
 
 void CommandSocket::sendPolygons(PrintFeatureType type, const Polygons& polygons, int line_width, int line_thickness, int line_feedrate)
 {
+    UNUSED_PARAM(type);
+    UNUSED_PARAM(polygons);
+    UNUSED_PARAM(line_width);
+    UNUSED_PARAM(line_thickness);
+    UNUSED_PARAM(line_feedrate);
 #ifdef ARCUS
     if (polygons.size() == 0)
     {
@@ -548,6 +558,11 @@ void CommandSocket::sendPolygons(PrintFeatureType type, const Polygons& polygons
 
 void CommandSocket::sendPolygon(PrintFeatureType type, ConstPolygonRef polygon, int line_width, int line_thickness, int line_feedrate)
 {
+    UNUSED_PARAM(type);
+    UNUSED_PARAM(polygon);
+    UNUSED_PARAM(line_width);
+    UNUSED_PARAM(line_thickness);
+    UNUSED_PARAM(line_feedrate);
 #ifdef ARCUS
     if (CommandSocket::isInstantiated())
     {
@@ -560,6 +575,11 @@ void CommandSocket::sendPolygon(PrintFeatureType type, ConstPolygonRef polygon, 
 
 void CommandSocket::sendLineTo(cura::PrintFeatureType type, Point to, int line_width, int line_thickness, int line_feedrate)
 {
+    UNUSED_PARAM(type);
+    UNUSED_PARAM(to);
+    UNUSED_PARAM(line_width);
+    UNUSED_PARAM(line_thickness);
+    UNUSED_PARAM(line_feedrate);
 #ifdef ARCUS
     if (CommandSocket::isInstantiated())
     {
@@ -572,6 +592,7 @@ void CommandSocket::sendLineTo(cura::PrintFeatureType type, Point to, int line_w
 
 void CommandSocket::setSendCurrentPosition(Point position)
 {
+    UNUSED_PARAM(position);
 #ifdef ARCUS
     if (CommandSocket::isInstantiated())
     {
@@ -583,6 +604,7 @@ void CommandSocket::setSendCurrentPosition(Point position)
 
 void CommandSocket::setLayerForSend(int layer_nr)
 {
+    UNUSED_PARAM(layer_nr);
 #ifdef ARCUS
     if (CommandSocket::isInstantiated())
     {
@@ -594,6 +616,7 @@ void CommandSocket::setLayerForSend(int layer_nr)
 
 void CommandSocket::setExtruderForSend(int extruder)
 {
+    UNUSED_PARAM(extruder);
 #ifdef ARCUS
     if (CommandSocket::isInstantiated())
     {
@@ -606,6 +629,7 @@ void CommandSocket::setExtruderForSend(int extruder)
 
 void CommandSocket::sendProgress(float amount)
 {
+    UNUSED_PARAM(amount);
 #ifdef ARCUS
     int rounded_amount = 1000 * amount;
     if (private_data->last_sent_progress == rounded_amount)

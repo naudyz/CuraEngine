@@ -477,7 +477,7 @@ void TreeSupport::generateContactPoints(const SliceMeshStorage& mesh, std::vecto
                     {
                         constexpr size_t distance_to_top = 0;
                         constexpr bool to_buildplate = true;
-                        Node contact_node(candidate, distance_to_top, (layer_nr + z_distance_top_layers) % 2, support_roof_layers, to_buildplate);
+                        Node contact_node(candidate, distance_to_top, ((layer_nr + z_distance_top_layers) % 2) ? true : false, support_roof_layers, to_buildplate);
                         contact_nodes[layer_nr].insert(contact_node);
                         added = true;
                     }
@@ -489,7 +489,7 @@ void TreeSupport::generateContactPoints(const SliceMeshStorage& mesh, std::vecto
                 PolygonUtils::moveInside(overhang_part, candidate);
                 constexpr size_t distance_to_top = 0;
                 constexpr bool to_buildplate = true;
-                Node contact_node(candidate, distance_to_top, layer_nr % 2, support_roof_layers, to_buildplate);
+                Node contact_node(candidate, distance_to_top, (layer_nr % 2) ? true : false, support_roof_layers, to_buildplate);
                 contact_nodes[layer_nr].insert(contact_node);
             }
         }

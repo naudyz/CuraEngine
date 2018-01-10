@@ -5,10 +5,10 @@
 namespace cura
 {
 
-SettingConfig::SettingConfig(std::string key, std::string label)
-: SettingContainer(key, label)
-{
-//     std::cerr << key << std::endl; // debug output to show all frontend registered settings...
-}
+//SettingConfig::SettingConfig(std::string key, std::string label)
+//: SettingContainer(key, label)
+//{
+////     std::cerr << key << std::endl; // debug output to show all frontend registered settings...
+//}
 
 }//namespace cura

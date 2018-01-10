@@ -8,7 +8,7 @@ namespace cura
 
 bool PolygonsPointIndex::initialized() const
 {
-    return polygons;
+    return polygons ? true : false;
 }
 
 }

@@ -814,7 +814,7 @@ Slicer::Slicer(Mesh* mesh, int initial_layer_thickness, int thickness, int slice
     }
 
     // define all layer z positions depending on slicing mode
-    for (unsigned int layer_nr = 0; layer_nr < slice_layer_count; layer_nr++)
+    for (unsigned int layer_nr = 0; layer_nr < (unsigned int)slice_layer_count; layer_nr++)
     {
         if (use_variable_layer_heights)
         {

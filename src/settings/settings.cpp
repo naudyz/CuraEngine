@@ -6,6 +6,7 @@
 #include <regex> // regex parsing for temp flow graph
 #include <string> // stod (string to double)
 #include "../utils/logoutput.h"
+#include "../utils/macros.h"
 
 #include "settings.h"
 #include "SettingRegistry.h"
@@ -201,7 +202,7 @@ bool SettingsBaseVirtual::getSettingBoolean(std::string key) const
         return true;
     if (value == "yes")
         return true;
-    if (value == "true" or value == "True") //Python uses "True"
+    if (value == "true" || value == "True") //Python uses "True"
         return true;
     int num = atoi(value.c_str());
     return num != 0;
@@ -297,6 +298,7 @@ FlowTempGraph SettingsBaseVirtual::getSettingAsFlowTempGraph(std::string key) co
         }
         catch (const std::invalid_argument& e)
         {
+            UNUSED_PARAM(e);
             logError("Couldn't read 2D graph element [%s,%s] in setting '%s'. Ignored.\n", first_substring.c_str(), second_substring.c_str(), key.c_str());
         }
     }
@@ -548,6 +550,7 @@ std::vector<int> SettingsBaseVirtual::getSettingAsIntegerList(std::string key) c
                 }
                 catch (const std::invalid_argument& e)
                 {
+                    UNUSED_PARAM(e);
                     logError("Couldn't read integer value (%s) in setting '%s'. Ignored.\n", val.c_str(), key.c_str());
                 }
             }

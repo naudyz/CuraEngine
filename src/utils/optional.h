@@ -131,7 +131,7 @@ public:
     }
     constexpr explicit operator bool() const
     {
-        return instance;
+        return instance ? true : false;
     }
     constexpr T& value() const&
     {

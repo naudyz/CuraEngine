@@ -294,7 +294,7 @@ void PrimeTower::preWipeAndPurge(const SliceDataStorage& storage, LayerPlan& gco
         gcode_layer.addTravel(prime_start);
     }
 
-    float flow = 0.0001; // Force this path being interpreted as an extrusion path, so that no Z hop will occur (TODO: really separately handle travel and extrusion moves)
+    float flow = (float)0.0001; // Force this path being interpreted as an extrusion path, so that no Z hop will occur (TODO: really separately handle travel and extrusion moves)
     gcode_layer.addExtrusionMove(prime_end, gcode_layer.configs_storage.prime_tower_config_per_extruder[extruder_nr], SpaceFillType::None, flow);
 }
 

@@ -3,15 +3,17 @@
 
 #include <sstream>
 #include <iostream> // debug IO
+#ifndef WIN32
 #include <libgen.h> // dirname
+#endif
 #include <string>
 #include <cstring> // strtok (split string using delimiters) strcpy
 #include <fstream> // ifstream (to see if file exists)
 
-#include "rapidjson/rapidjson.h"
-#include "rapidjson/document.h"
-#include "rapidjson/error/en.h"
-#include "rapidjson/filereadstream.h"
+#include "../libs/rapidjson/rapidjson.h"
+#include "../libs/rapidjson/document.h"
+#include "../libs/rapidjson/error/en.h"
+#include "../libs/rapidjson/filereadstream.h"
 #include "../utils/logoutput.h"
 
 namespace cura
@@ -156,9 +158,13 @@ int SettingRegistry::loadJSONsettings(std::string filename, SettingsBase* settin
     if (err) { return err; }
 
     { // add parent folder to search paths
+#ifndef WIN32
         char filename_cstr[filename.size()];
         std::strcpy(filename_cstr, filename.c_str()); // copy the string because dirname(.) changes the input string!!!
         std::string folder_name = std::string(dirname(filename_cstr));
+#else
+        std::string folder_name = filename.substr(0, filename.find_last_of('\\'));
+#endif
         search_paths.emplace(folder_name);
     }
 
